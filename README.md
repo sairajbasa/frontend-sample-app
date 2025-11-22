@@ -1,4 +1,4 @@
-# 🌐 Frontend Sample – EC2 Deployment Guide
+# 🌐 Frontend Sample – EC2 Deployment Guide on Apache (httpd).
 
 This repository contains the **frontend-sample** application packaged as a ZIP file.  
 Follow this guide to deploy the application automatically on an **AWS EC2 instance**.
