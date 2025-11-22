@@ -1,7 +1,7 @@
 ## 🚀 Steps to Deploy the Frontend Sample Application on AWS EC2
 1️⃣ Launch an EC2 Instance
 
-Choose Amazon Linux 2 or Ubuntu
+Choose RedHat Linux
 
 Select t2.micro (Free Tier eligible)
 
