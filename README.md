@@ -28,7 +28,7 @@ Paste the script below in **User Data** during EC2 launch:
 sudo su -
 yum install -y httpd
 yum install -y wget
-wget https://github.com/sairajbasa/frontend-sample-app/blob/main/feane-1.0.0.zip
+wget https://github.com/sairajbasa/frontend-sample-app/raw/main/feane-1.0.0.zip
 yum install -y unzip
 unzip feane-1.0.0.zip
 cp -r feane-1.0.0/* /var/www/html
