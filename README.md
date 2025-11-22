@@ -1,36 +1,73 @@
-## 🚀 Steps to Deploy the Frontend Sample Application on AWS EC2
-1️⃣ Launch an EC2 Instance
+# 🌐 Frontend Sample – EC2 Deployment Guide
 
-Choose RedHat Linux
+This repository contains the **frontend-sample** application packaged as a ZIP file.  
+Follow this guide to deploy the application automatically on an **AWS EC2 instance**.
 
-Select t2.micro (Free Tier eligible)
+---
 
-Allow HTTP (Port 80) in the security group
+## 🔧 Prerequisites
 
-2️⃣ Install a Web Server
+Before deployment, ensure the following:
 
-Install Apache HTTPD (on Amazon Linux) or Apache2 (on Ubuntu)
+1. Launch an **EC2 instance with RedHat / RHEL OS**.
+2. Select an instance type (e.g., **t2.micro** for free tier).
+3. Security Group must allow:
+   - **HTTP (Port 80)** → Required to access the website in a browser
+   - **SSH (Port 22)** → Optional but recommended for troubleshooting
+4. Assign a **Public IPv4 address** to the EC2 instance.
+5. Add the deployment shell script in **EC2 → Advanced Details → User Data**.
 
-Enable and start the web server service
+---
 
-3️⃣ Download the ZIP File from GitHub
+## 🚀 EC2 User Data – Deployment Script
 
-Navigate to the web server's document root directory
+Paste the script below in **User Data** during EC2 launch:
 
-Download the ZIP file from this repository to the server
+```bash
+#!/bin/bash
+sudo su -
+yum install -y httpd
+yum install -y wget
+wget https://github.com/sairajbasa/frontend-sample-app/blob/main/feane-1.0.0.zip
+yum install -y unzip
+unzip feane-1.0.0.zip
+cp -r feane-1.0.0/* /var/www/html
+systemctl enable httpd
+systemctl start httpd
+```
 
-4️⃣ Extract the ZIP File
+📌 What This Script Does
+Step	Action
+1	Switch to root user
+2	Installs Apache HTTP Web Server
+3	Installs wget tool for downloading files
+4	Downloads the frontend ZIP file from GitHub
+5	Installs unzip for ZIP extraction
+6	Extracts the downloaded ZIP file
+7	Copies website files to /var/www/html
+8	Enables automatic startup for Apache
+9	Starts Apache service
 
-Unzip the downloaded file into the web server directory
+🌍 Accessing Your Frontend
+After the instance is launched and running:
 
-Ensure that all HTML pages, CSS, JS, images, and fonts are extracted correctly
+Go to your web browser
 
-5️⃣ Verify File Permissions
+Enter:
 
-Make sure the web server can read and serve the files
+cpp
+Copy code
+```bash
+http://<EC2-PUBLIC-IP>
+```
+You should now see the Frontend Sample Website hosted from your EC2 instance.
 
-6️⃣ Access the Application
+📝 Repository Structure
+File	Description
+feane-1.0.0.zip	Frontend sample application archive
+README.md	Deployment documentation
 
-Open the EC2 Public IP address in a web browser
+🙌 Support
+If you face any issue or want automation support (deploy.sh file or CI/CD), feel free to raise an Issue in this repository.
 
-The homepage should load successfully
+Happy Deploying! 🚀
